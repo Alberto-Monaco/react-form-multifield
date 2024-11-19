@@ -36,7 +36,7 @@ function App() {
 
 	return (
 		<>
-			<div className='container w-50 my-3'>
+			<div className='container  my-3'>
 				<h1>React form</h1>
 
 				<form onSubmit={addArticle}>
@@ -52,6 +52,7 @@ function App() {
 							className='form-control'
 							placeholder='article title'
 							value={formData.title}
+							required
 							onChange={handleFormField}
 						/>
 					</div>
@@ -126,9 +127,12 @@ function App() {
 						<li key={index} className='list-group-item d-flex justify-content-between align-items-center'>
 							{article.title}
 							<div className='d-flex'>
-								<img src={article.image} alt={article.title} style={{ maxWidth: '200px' }} />
-								<span>Categoria: {article.category} </span>
-								{article.published && <span>Pubblicato</span>}
+								<img src={article.image} style={{ maxWidth: '200px' }} />
+								<div>
+									<span>Content: {article.content}</span>
+									<span>Categoria: {article.category} </span>
+									{article.published && <span>Pubblicato</span>}
+								</div>
 								<button className='btn btn-danger' data-index={index} onClick={deleteArticle}>
 									🗑️
 								</button>
