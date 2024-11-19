@@ -5,11 +5,22 @@ const initialFormData = {
 	image: '',
 	content: '',
 	category: 'news',
-	isTagged: false
+	published: false
 }
 function App() {
 	const [formData, setFormData] = useState(initialFormData)
 	const [articles, setArticles] = useState([])
+
+	function handleFormField(e) {
+		//console.log(e.target);
+
+		const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+
+		setFormData({
+			...formData,
+			[e.target.name]: value
+		})
+	}
 
 	function addArticle(e) {
 		e.preventDefault()
@@ -41,7 +52,7 @@ function App() {
 							className='form-control'
 							placeholder='article title'
 							value={formData.title}
-							onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+							onChange={handleFormField}
 						/>
 					</div>
 					<div className='mb-3'>
@@ -56,7 +67,7 @@ function App() {
 							className='form-control'
 							placeholder='article image'
 							value={formData.image}
-							onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+							onChange={handleFormField}
 						/>
 					</div>
 					<div className='mb-3'>
@@ -71,7 +82,7 @@ function App() {
 							className='form-control'
 							placeholder='article content'
 							value={formData.content}
-							onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+							onChange={handleFormField}
 						/>
 					</div>
 					<div className='mb-3'>
@@ -86,29 +97,25 @@ function App() {
 							className='form-control'
 							placeholder='article category'
 							value={formData.category}
-							onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+							onChange={handleFormField}
 						/>
 					</div>
 					<div className='mb-3'>
-						<label htmlFor='isTagged' className='form-label'>
-							Is Tagged
+						<label htmlFor='published' className='form-check'>
+							Published
 						</label>
 
 						<input
 							type='checkbox'
-							name='isTagged'
-							id='isTagged'
-							className='form-control'
-							placeholder='article isTagged'
-							value={formData.isTagged}
-							onChange={(e) => setFormData({ ...formData, isTagged: e.target.value })}
+							name='published'
+							id='published'
+							className='form-check-input'
+							placeholder='article published'
+							value={formData.published}
+							onChange={handleFormField}
 						/>
 					</div>
-					<div className='mb-3'>
-						<label htmlFor='isPublished' className='form-label'>
-							Is Published
-						</label>
-					</div>
+
 					<button type='submit' className='btn btn-primary'>
 						Aggiungi Articolo
 					</button>
@@ -119,6 +126,9 @@ function App() {
 						<li key={index} className='list-group-item d-flex justify-content-between align-items-center'>
 							{article.title}
 							<div className='d-flex'>
+								<img src={article.image} alt={article.title} style={{ maxWidth: '200px' }} />
+								<span>Categoria: {article.category} </span>
+								{article.published && <span>Pubblicato</span>}
 								<button className='btn btn-danger' data-index={index} onClick={deleteArticle}>
 									🗑️
 								</button>
