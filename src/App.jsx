@@ -116,7 +116,7 @@ function App() {
 					</div>
 
 					<button type='submit' className='btn btn-primary my-3'>
-						Aggiungi Articolo
+						Add Article
 					</button>
 				</form>
 
