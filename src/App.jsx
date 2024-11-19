@@ -37,89 +37,104 @@ function App() {
 			<div className='container  my-3'>
 				<h1>React form</h1>
 
-				<form onSubmit={addArticle}>
-					<div className='mb-3'>
-						<label htmlFor='title' className='form-label'>
-							Title
-						</label>
-
-						<input
-							type='text'
-							name='title'
-							id='title'
-							className='form-control'
-							placeholder='article title'
-							value={formData.title}
-							required
-							onChange={handleFormField}
-						/>
+				<div
+					id='off-canvas-form'
+					popover='true'
+					className='bg-light p-3 border-0 shadow-lg text-dark'
+					style={{ minHeight: '100vh' }}>
+					<div className='d-flex justify-content-between align-items-center'>
+						<h3>Add a new Article</h3>
+						<button className='btn btn-dark' type='button' popovertarget='off-canvas-form' popovertargetaction='hide'>
+							<i className='bi bi-x'></i> Close
+						</button>
 					</div>
-					<div className='mb-3'>
-						<label htmlFor='image' className='form-label'>
-							Image
-						</label>
+					<p>use the form below to add a new article</p>
 
-						<input
-							type='text'
-							name='image'
-							id='image'
-							className='form-control'
-							placeholder='article image'
-							value={formData.image}
-							onChange={handleFormField}
-						/>
-					</div>
-					<div className='mb-3'>
-						<label htmlFor='content' className='form-label'>
-							Content
-						</label>
+					<form onSubmit={addArticle}>
+						<div className='mb-3'>
+							<label htmlFor='title' className='form-label'>
+								Title
+							</label>
 
-						<input
-							type='text'
-							name='content'
-							id='content'
-							className='form-control'
-							placeholder='article content'
-							value={formData.content}
-							onChange={handleFormField}
-						/>
-					</div>
-					<div className='mb-3'>
-						<label htmlFor='category' className='form-label'>
-							Category
-						</label>
+							<input
+								type='text'
+								name='title'
+								id='title'
+								className='form-control'
+								placeholder='article title'
+								value={formData.title}
+								required
+								onChange={handleFormField}
+							/>
+						</div>
+						<div className='mb-3'>
+							<label htmlFor='image' className='form-label'>
+								Image
+							</label>
 
-						<input
-							type='text'
-							name='category'
-							id='category'
-							className='form-control'
-							placeholder='article category'
-							value={formData.category}
-							onChange={handleFormField}
-						/>
-					</div>
-					<div className='mb-3 form-check'>
-						<label htmlFor='published' className='form-check-label'>
-							Published
-						</label>
+							<input
+								type='text'
+								name='image'
+								id='image'
+								className='form-control'
+								placeholder='article image'
+								value={formData.image}
+								onChange={handleFormField}
+							/>
+						</div>
+						<div className='mb-3'>
+							<label htmlFor='content' className='form-label'>
+								Content
+							</label>
 
-						<input
-							type='checkbox'
-							name='published'
-							id='published'
-							className='form-check-input'
-							placeholder='article published'
-							value={formData.published}
-							onChange={handleFormField}
-						/>
-					</div>
+							<input
+								type='text'
+								name='content'
+								id='content'
+								className='form-control'
+								placeholder='article content'
+								value={formData.content}
+								onChange={handleFormField}
+							/>
+						</div>
+						<div className='mb-3'>
+							<label htmlFor='category' className='form-label'>
+								Category
+							</label>
 
-					<button type='submit' className='btn btn-primary my-3'>
-						Add Article
-					</button>
-				</form>
+							<input
+								type='text'
+								name='category'
+								id='category'
+								className='form-control'
+								placeholder='article category'
+								value={formData.category}
+								onChange={handleFormField}
+							/>
+						</div>
+						<div className='mb-3 form-check'>
+							<label htmlFor='published' className='form-check-label'>
+								Published
+							</label>
 
+							<input
+								type='checkbox'
+								name='published'
+								id='published'
+								className='form-check-input'
+								placeholder='article published'
+								checked={formData.published}
+								onChange={handleFormField}
+							/>
+						</div>
+						<button type='submit' className='btn btn-secondary'>
+							<i className='bi bi-floppy'></i> Save
+						</button>
+					</form>
+				</div>
+				<button type='button' className='btn btn-primary my-3' popovertarget='off-canvas-form'>
+					Add Article
+				</button>
 				<ul className='list-group'>
 					{articles.map((article, index) => (
 						<li
