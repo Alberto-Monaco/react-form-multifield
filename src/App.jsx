@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 const initialFormData = {
 	title: '',
-	image: '',
+	image: '/img/1.jpg',
 	content: '',
-	category: 'news',
+	category: '',
 	published: false
 }
 function App() {
@@ -12,8 +12,6 @@ function App() {
 	const [articles, setArticles] = useState([])
 
 	function handleFormField(e) {
-		//console.log(e.target);
-
 		const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
 		setFormData({
@@ -101,8 +99,8 @@ function App() {
 							onChange={handleFormField}
 						/>
 					</div>
-					<div className='mb-3'>
-						<label htmlFor='published' className='form-check'>
+					<div className='mb-3 form-check'>
+						<label htmlFor='published' className='form-check-label'>
 							Published
 						</label>
 
@@ -117,26 +115,30 @@ function App() {
 						/>
 					</div>
 
-					<button type='submit' className='btn btn-primary'>
+					<button type='submit' className='btn btn-primary my-3'>
 						Aggiungi Articolo
 					</button>
 				</form>
 
 				<ul className='list-group'>
 					{articles.map((article, index) => (
-						<li key={index} className='list-group-item d-flex justify-content-between align-items-center'>
-							{article.title}
-							<div className='d-flex'>
-								<img src={article.image} style={{ maxWidth: '200px' }} />
+						<li
+							key={index}
+							className='list-group-item d-flex justify-content-between align-items-center border rounded mb-3 p-3'>
+							<div className='d-flex align-items-center gap-3'>
+								<img src={article.image} style={{ maxWidth: '150px' }} />
 								<div>
-									<span>Content: {article.content}</span>
-									<span>Categoria: {article.category} </span>
-									{article.published && <span>Pubblicato</span>}
+									<h5>{article.title}</h5>
+									<div>
+										<div>Content: {article.content}</div>
+										<div>Categoria: {article.category}</div>
+										{article.published && <div className='badge bg-success '>Pubblicato</div>}
+									</div>
 								</div>
-								<button className='btn btn-danger' data-index={index} onClick={deleteArticle}>
-									🗑️
-								</button>
 							</div>
+							<button className='btn btn-danger' data-index={index} onClick={deleteArticle}>
+								🗑️
+							</button>
 						</li>
 					))}
 				</ul>
