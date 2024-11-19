@@ -5,12 +5,10 @@ const initialFormData = {
 	image: '',
 	content: '',
 	category: 'news',
-	isTagged: false,
-	isPublished: false
+	isTagged: false
 }
 function App() {
 	const [formData, setFormData] = useState(initialFormData)
-	const [newArticle, setNewArticle] = useState('')
 	const [articles, setArticles] = useState([])
 
 	function addArticle(e) {
@@ -22,12 +20,6 @@ function App() {
 	function deleteArticle(e) {
 		const articleIndexToDelete = Number(e.target.getAttribute('data-index'))
 		const newArticles = articles.filter((article, index) => index !== articleIndexToDelete)
-		setArticles(newArticles)
-	}
-	function changeArticle(e) {
-		const articleIndexToChange = Number(e.target.getAttribute('data-index'))
-		const changedArticle = prompt('Enter new article')
-		const newArticles = articles.map((article, index) => (index == articleIndexToChange ? changedArticle : article))
 		setArticles(newArticles)
 	}
 
@@ -103,7 +95,7 @@ function App() {
 						</label>
 
 						<input
-							type='text'
+							type='checkbox'
 							name='isTagged'
 							id='isTagged'
 							className='form-control'
@@ -116,16 +108,6 @@ function App() {
 						<label htmlFor='isPublished' className='form-label'>
 							Is Published
 						</label>
-
-						<input
-							type='text'
-							name='isPublished'
-							id='isPublished'
-							className='form-control'
-							placeholder='article isPublished'
-							value={formData.isPublished}
-							onChange={(e) => setFormData({ ...formData, isPublished: e.target.value })}
-						/>
 					</div>
 					<button type='submit' className='btn btn-primary'>
 						Aggiungi Articolo
@@ -137,9 +119,6 @@ function App() {
 						<li key={index} className='list-group-item d-flex justify-content-between align-items-center'>
 							{article.title}
 							<div className='d-flex'>
-								<button className='btn btn-warning me-2' data-index={index} onClick={changeArticle}>
-									✏️
-								</button>
 								<button className='btn btn-danger' data-index={index} onClick={deleteArticle}>
 									🗑️
 								</button>
